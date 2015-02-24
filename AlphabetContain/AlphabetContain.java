@@ -6,9 +6,9 @@ public class AlphabetContain {
 		System.out.println(smallestSubstringContainingTheAlphabet("abcdefghijklmn124345678!@#$%^&*opqrstuvwxyz!*abcdefghijklmn"));
 	}
 	
-	public static boolean contain(String B){
+	public static boolean contain(String temp){
 
-	    boolean[] flag = new boolean[26];
+	    boolean[] flag = new boolean[26]; \\ 26 symbols in the alphabet
 	    
 	    
 	    
@@ -16,28 +16,28 @@ public class AlphabetContain {
 	            flag[i]=false;
 	    }
 
-	    for(int i=0; i<B.length(); i++){
-	        if((int)B.charAt(i)-97>=0 && (int)B.charAt(i)-97<=26){
-	            flag[(int)B.charAt(i)-97]=true;
+	    for(int i=0; i<temp.length(); i++){
+	        if((int)temp.charAt(i)-97>=0 && (int)temp.charAt(i)-97<=26){
+	            flag[(int)temp.charAt(i)-97]=true;
 	        }
 	    }
 
-	    boolean cont=true;
+	    boolean contAlpha=true;
 
 	    for(int i=0; i<26; i++){
 	        if(!flag[i]){
-	            cont=false;
+	            contAlpha=false;
 	        }
 	    }
 
-	    return cont;
+	    return contAlpha;
 	}
 	
-	public static String smallestSubstringContainingTheAlphabet(String A){
+	public static String smallestSubstringContainingTheAlphabet(String text){
 		
-		for(int i=26;i<=A.length(); i++){
-		    for(int j=0; j<=A.length()-i; j++){
-		        String temp=A.substring(j, j+i);
+		for(int i=26;i<=text.length(); i++){
+		    for(int j=0; j<=text.length()-i; j++){
+		        String temp=text.substring(j, j+i);
 		        if(contain(temp)){
 		            return temp;
 		        }

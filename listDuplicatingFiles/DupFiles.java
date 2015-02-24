@@ -12,19 +12,21 @@ public class DupFiles {
 	
 	public static void main(String[] args) throws IOException {
 		
-		  File[] files = new File("D:\\opit folder").listFiles(); //D:\\opit folder is the checked directory
+		  File[] files = new File("D:\\NewFolder").listFiles(); //D:\\NewFolder is the checked directory
+
 		    getFiles(files);
 		    
-		    list_Files();
+		    print_Files();
 		    
-		    removeDupFiles();
-		    System.out.println("========"); //separates before and after duplicate files been removed
+		    removeDuplicatedFiles();
+
+		    System.out.println();
 		    
-		    list_Files();
+		    print_Files();
 
 	}
 	
-	public static void removeDupFiles() throws IOException{
+	public static void removeDuplicatedFiles() throws IOException{
 		
 		if(MyFiles.isEmpty()){
 			
@@ -72,14 +74,15 @@ public class DupFiles {
 	    for (File file : files) {
 	        if (file.isDirectory()) {
 	            getFiles(file.listFiles());
-	        } else {
+	        } 
+		else {
 	            MyFiles.add(file);
 	        }
 	    }
 	}
 	
-	public static void list_Files(){
-		for(int i=0; i<MyFiles.size(); i++){
+	public static void print_Files() {
+		for(int i=0; i<MyFiles.size(); i++) {
 			System.out.println(MyFiles.get(i).getName());
 		}
 	}
