@@ -4,44 +4,56 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class DupFiles {
 	
-	public static List<File> MyFiles = new ArrayList<File>();
+	public static List<File> myFiles = new ArrayList<File>();
 	
-	public static void main(String[] args) throws IOException {
-		
-		  File[] files = new File("D:\\NewFolder").listFiles(); //D:\\NewFolder is the checked directory
+	public static void main(String[] args) {
 
-		    getFiles(files);
-		    
-		    print_Files();
-		    
-		    removeDuplicatedFiles();
 
-		    System.out.println();
-		    
-		    print_Files();
+		  Scanner scan = new Scanner(System.in);
+
+		  String dir = scan.nextLine();
+			
+		  ListDuplicatingFiles(dir);
 
 	}
 	
-	public static void removeDuplicatedFiles() throws IOException{
+	public static void ListDuplicatingFiles(String[] dir) throws IOException {
+	
+		    File[] files = new File(dir).listFiles(); //dir is the checked directory
+
+		    GetFiles(files);
+		    
+		    PrintFiles();
+		    
+		    RemoveDuplicatedFiles();
+
+		    System.out.println();
+		    
+		    PrintFiles();
+	}
+	
+	
+	public static void RemoveDuplicatedFiles() throws IOException{
 		
-		if(MyFiles.isEmpty()){
+		if(myFiles.isEmpty()){
 			
 			System.out.println("no files");
 			
 		}else
 		{
-			for(int i=0; i<MyFiles.size(); i++){
+			for(int i=0; i<myFiles.size(); i++){
 				
 				boolean flag=false;
 				
-				for(int j=i+1; j<MyFiles.size(); j++){
+				for(int j=i+1; j<myFiles.size(); j++){
 					
-					FileReader FR_i = new FileReader(MyFiles.get(i));
-					FileReader FR_j = new FileReader(MyFiles.get(j));
+					FileReader FR_i = new FileReader(myFiles.get(i));
+					FileReader FR_j = new FileReader(myFiles.get(j));
 					
 					BufferedReader reader1 = new BufferedReader(FR_i);
 					BufferedReader reader2 = new BufferedReader(FR_j);
@@ -59,7 +71,7 @@ public class DupFiles {
 					}
 					
 					if(flag==false){
-						MyFiles.remove(j);
+						myFiles.remove(j);
 						j--;
 					}	
 					
@@ -70,20 +82,20 @@ public class DupFiles {
 		}	
 	}
 		
-	public static void getFiles(File[] files) {
+	public static void GetFiles(File[] files) {
 	    for (File file : files) {
 	        if (file.isDirectory()) {
-	            getFiles(file.listFiles());
+	            GetFiles(file.listFiles());
 	        } 
 		else {
-	            MyFiles.add(file);
+	            myFiles.add(file);
 	        }
 	    }
 	}
 	
-	public static void print_Files() {
-		for(int i=0; i<MyFiles.size(); i++) {
-			System.out.println(MyFiles.get(i).getName());
+	public static void PrintFiles() {
+		for(int i=0; i<myFiles.size(); i++) {
+			System.out.println(myFiles.get(i).getName());
 		}
 	}
 	
